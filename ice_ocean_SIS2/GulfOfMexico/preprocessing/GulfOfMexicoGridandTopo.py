@@ -128,6 +128,30 @@ f.close()
 
 # Generate mosaic files for FMS exchange grid
 
+name = 'ocean_mosaic'
+rg = nc.Dataset(name+'.nc','w')
+rg.createDimension('ntiles',1)
+rg.createDimension('string',255)
+mosaic = rg.createVariable('mosaic','c',('string',))
+mosaic.standard_name = 'grid_mosaic_spec'
+mosaic.children = 'contacts'
+mosaic.grid_descriptor = ''
+gridlocation = rg.createVariable('gridlocation','c',('string',))
+gridlocation.standard_name = 'grid_file_location'
+gridfiles = rg.createVariable('gridfiles','c',('ntiles','string',))
+gridtiles = rg.createVariable('gridtiles','c',('ntiles','string',))
+rg.grid_version = '0.2'
+# Fill in data
+mosaic[:] = '\000' * 255
+mosaic[:12] = 'ocean_mosaic'
+gridlocation[:] = '\000' * 255
+gridlocation[:2] = './'
+gridfiles[:] = '\000' * 255
+gridfiles[0,:14] = 'ocean_hgrid.nc'
+gridtiles[:] = '\000' * 255
+gridtiles[0,:5] = 'tile1'
+rg.close()
+
 def set_string(variable, value):
     """Sets "variable" to "value" padded with blanks where
     "variable" is a netcdf variable object and "value" is a string."""
@@ -144,6 +168,7 @@ d2y=dy+numpy.roll(dy,shift=-1,axis=0)
 d2y=d2y[::2,:]
 DY=0.5*(d2y+numpy.roll(d2y,shift=-1,axis=1))
 DY=DY[:,:-1:2]
+
 
 nj=model_grid.jm;ni=model_grid.im
 snj=2*nj;sni=2*ni
