@@ -4,8 +4,6 @@
          restart_input_dir = 'INPUT',
          restart_output_dir = 'RESTART',
          parameter_filename = 'MOM_input',
-                              'MOM_layout',
-                              'MOM_saltrestore',
                               'MOM_override'
 /
 
@@ -15,7 +13,6 @@
         restart_input_dir = 'INPUT/',
         restart_output_dir = 'RESTART/',
         parameter_filename = 'SIS_input',
-                             'SIS_layout',
                              'SIS_override' /
 
  &atmos_model_nml
@@ -23,9 +20,9 @@
 /
 
  &coupler_nml
-            months = 0,
+            months = 1,
             days   = 0,
-            hours  = 6,
+            hours  = 0,
             current_date = 1900,1,1,0,0,0,
             calendar = 'NOLEAP',
             dt_cpld = 1800,
