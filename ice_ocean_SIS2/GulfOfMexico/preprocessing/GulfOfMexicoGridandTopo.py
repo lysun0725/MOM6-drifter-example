@@ -1,39 +1,32 @@
+#This script requires the MIDAS package, in addition to netCDF4 and numpy
+#MIDAS is located at https://github.com/mjharriso/MIDAS
+#Anaconda installation guidelines:
+#https://github.com/mjharriso/MIDAS/blob/master/.travis.yml
 
-# coding: utf-8
 
-# In[48]:
-
-#get_ipython().magic(u'pylab inline')
 from midas.rectgrid import *
 from midas.rectgrid_gen import *
 import numpy as np
 import netCDF4 as nc
-from IPython.display import Image
-from IPython.core.display import HTML 
-
-
-# In[49]:
-
 import matplotlib.pyplot as plt
 
 
-# In[60]:
-
+# Generate approximately 1/24 degree supergrid (combined tracer and C-grid velocity grids)
 x=np.linspace(262.,279.5,441)
 y=np.linspace(18.,30.5,301)
 X,Y=np.meshgrid(x,y)
 
 
-# In[61]:
-
+# sgrid is a MIDAS supergrid class structure
 sgrid=supergrid(xdat=X,ydat=Y,axis_units='degrees')
 sgrid.grid_metrics()
 model_grid=quadmesh(supergrid=sgrid)
 
 
-# In[62]:
+# Read 30 sec GEBCO data (from http://www.gebco.net/data_and_products/gridded_bathymetry_data)
 
 topo_path='GEBCO_2014_2D.nc'
+#quadmesh is a MIDAS grid class
 topo_grid=quadmesh(topo_path,var='elevation',simple_grid=True,cyclic=True)
 ybnds=[sgrid.y.min()-0.1,sgrid.y.max()+0.1]
 xbnds=[sgrid.x.min()-0.1,sgrid.x.max()+0.1]
@@ -45,26 +38,23 @@ region=topo_grid.indexed_region(j=(ystart,yend),i=(xstart,xend))
 TOPO=state(topo_path,grid=topo_grid,geo_region=region,fields=['elevation'])
 
 
-# In[63]:
+# Calculate a mean elevation of the 30-sec data on the model grid
 
 R=TOPO.subtile('elevation',target=model_grid)
 
 
-# In[76]:
 
 def show_depth(grid,depth):
     fig=plt.figure(figsize=(12,8))
-    plt.pcolormesh(grid.x_T_bounds,grid.y_T_bounds,np.ma.masked_where(depth<=0.,depth),vmin=0,vmax=5000);
+    plt.pcolormesh(grid.x_T_bounds,grid.y_T_bounds,np.ma.masked_where(depth<=0.,depth),\
+                   vmin=0,vmax=5000);
     plt.colorbar();
     plt.title('Model Bathymetry from GEBCO (m)')
 
 
-# In[77]:
+#show_depth(model_grid,-sq(R.mean))
+#plt.show()
 
-show_depth(model_grid,-sq(R.mean))
-
-
-# In[129]:
 
 def ice9it(i,j,depth,shallow=0.0):
   # Iterative implementation of "ice 9"
@@ -74,7 +64,6 @@ def ice9it(i,j,depth,shallow=0.0):
   stack.add( (j,i) )
   while stack:
     (j,i) = stack.pop()
-#    print i,j,depth[j,i]
     if wetMask[j,i] or depth[j,i] <= shallow: continue
     wetMask[j,i] = 1
     if i>0: stack.add( (j,i-1) )
@@ -95,31 +84,49 @@ def applyIce9(depth, i0,j0):
   return newDepth
 
 
-# In[127]:
+# Remove isolated cells
 
 model_grid.D=-sq(R.mean)
 model_grid.D[model_grid.D<0.0]=0.0
 Depth=applyIce9(model_grid.D,110,75)
 
 
-# In[128]:
 
-show_depth(model_grid,Depth)
+#show_depth(model_grid,Depth)
+#plt.show()
 
-
-# In[130]:
 
 model_grid.D=Depth
 model_grid.wet[model_grid.D==0.]=0
 model_grid.wet[model_grid.D>0.]=1
 
+# Save interpolated topography to file
+
 S=state(grid=model_grid)
 vdict=R.var_dict['mean']
 S.add_field_from_array(model_grid.D,'depth',var_dict=vdict)
-
 S.write_nc('topog.nc',fields=['depth'])
+f=nc.Dataset('topog.nc','a')
+f.createDimension('ntiles',1)
+f.close()
+
+
+# Save supergrid to file
 
 sgrid.write_nc('ocean_hgrid.nc')
+f=nc.Dataset('ocean_hgrid.nc','a')
+str=f.createDimension('string',255)
+tile=f.createVariable('tile','S1',('string'))
+tile[0:4]='tile1'
+var=f.variables['tile']
+dat = np.empty(1,'S'+repr(len(var)))
+dat[0]='tile1'
+dc=nc.stringtochar(dat)
+var[:]=dc
+f.close()
+
+
+# Generate mosaic files for FMS exchange grid
 
 def set_string(variable, value):
     """Sets "variable" to "value" padded with blanks where
