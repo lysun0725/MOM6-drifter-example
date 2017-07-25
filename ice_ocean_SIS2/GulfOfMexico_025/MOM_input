@@ -12,11 +12,11 @@
 TRIPOLAR_N = False               !   [Boolean] default = False
                                 ! Use tripolar connectivity at the northern edge of the
                                 ! domain.  With TRIPOLAR_N, NIGLOBAL must be even.
-NIGLOBAL = 220                 !
+NIGLOBAL = 70                 !
                                 ! The total number of thickness grid points in the
                                 ! x-direction in the physical domain. With STATIC_MEMORY_
                                 ! this is set in MOM_memory.h at compile time.
-NJGLOBAL = 150                 !
+NJGLOBAL = 50                 !
                                 ! The total number of thickness grid points in the
                                 ! y-direction in the physical domain. With STATIC_MEMORY_
                                 ! this is set in MOM_memory.h at compile time.
@@ -26,11 +26,11 @@ NJGLOBAL = 150                 !
 OBC_NUMBER_OF_SEGMENTS = 2      ! [Integer] The number of open boundary segments.
 OBC_SEGMENT_001 = "J=0,I=0:N,FLATHER,ORLANSKI,NUDGED"
 OBC_SEGMENT_002 = "I=N,J=0:N,FLATHER,ORLANSKI,NUDGED"
-OBC_SEGMENT_001_DATA = "U=file:obc_monthly_GOM.nc(u),V=file:obc_monthly_GOM.nc(v),SSH=file:obc_daily_GOM.nc(zeta)"
-OBC_SEGMENT_002_DATA = "U=file:obc_monthly_GOM.nc(u),V=file:obc_monthly_GOM.nc(v),SSH=file:obc_daily_GOM.nc(zeta)"
+!OBC_SEGMENT_001_DATA = "U=file:obc_monthly_GOM.nc(u),V=file:obc_monthly_GOM.nc(v),SSH=file:obc_daily_GOM.nc(zeta)"
+!OBC_SEGMENT_002_DATA = "U=file:obc_monthly_GOM.nc(u),V=file:obc_monthly_GOM.nc(v),SSH=file:obc_daily_GOM.nc(zeta)"
 
-!OBC_SEGMENT_001_DATA = "U=value:0.0,V=value:0.0,SSH=value:0.0"
-!OBC_SEGMENT_002_DATA = "U=value:0.0,V=value:0.0,SSH=value:0.0"
+OBC_SEGMENT_001_DATA = "U=value:0.0,V=value:0.0,SSH=value:0.0"
+OBC_SEGMENT_002_DATA = "U=value:0.0,V=value:0.0,SSH=value:0.0"
 
 OBC_ZERO_VORTICITY = False      !   [Boolean] default = False
                                 ! If true, sets relative vorticity to zero on open boundaries.
