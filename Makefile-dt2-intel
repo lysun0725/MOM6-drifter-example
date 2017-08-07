@@ -75,7 +75,7 @@ compile_drifters: compile_libs
 
 	mkdir -p build/drifters.$(PLATFORM).$(COMPILER).debug
 	(cd build/drifters.$(PLATFORM).$(COMPILER).debug/; \
-	rm -f path_names; ../../src/mkmf/bin/list_paths ../../src/drifters/{particle_driver.F90}  ;\
+	rm -f path_names; ../../src/mkmf/bin/list_paths ../../src/drifters/{particle_driver.F90,particles.F90,particles_framework.F90,p    articles_io.F90}  ;\
 	../../src/mkmf/bin/mkmf -t ../../src/mkmf/templates/$(PLATFORM)-$(COMPILER).mk -o  '-I../../src/FMS/include -I../../src/MOM6/src/framework -I../../src/MOM6/config_src/dynamic \
 	-I../MOM6.$(PLATFORM).$(COMPILER).debug -I../shared.$(PLATFORM).$(COMPILER).debug' -l '-L../MOM6.$(PLATFORM).$(COMPILER).debug -lMOM6 -L../shared.$(PLATFORM).$(COMPILER).debug -lfms' \
 	-p drifters -c "-Duse_libMPI -Duse_netCDF -DSPMD " path_names; \
