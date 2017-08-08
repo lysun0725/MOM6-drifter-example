@@ -79,7 +79,7 @@ compile_drifters: compile_libs
 	../../src/mkmf/bin/mkmf -t ../../src/mkmf/templates/$(PLATFORM)-$(COMPILER).mk -o  '-I../../src/FMS/include -I../../src/MOM6/src/framework -I../../src/MOM6/config_src/dynamic \
 	-I../MOM6.$(PLATFORM).$(COMPILER).debug -I../shared.$(PLATFORM).$(COMPILER).debug' -l '-L../MOM6.$(PLATFORM).$(COMPILER).debug -lMOM6 -L../shared.$(PLATFORM).$(COMPILER).debug -lfms' \
 	-p drifters -c "-Duse_libMPI -Duse_netCDF -DSPMD " path_names; \
-	source ../../build/env/$(PLATFORM)-$(COMPILER); make  NETCDF=4 REPRO=1 -j 8 drifters)
+	source ../../build/env/$(PLATFORM)-$(COMPILER); make  NETCDF=4 DEBUG=1 -j 8 drifters)
 	
 test_drifters: compile_MOM6_solo
 	(export LD_LIBRARY_PATH=$(CONDA_PREFIX)/lib;cd ocean_only/double_gyre;mkdir RESTART;mpirun -n 4 ../../build/MOM6_solo.$(PLATFORM).$(COMPILER).repro/MOM6)
