@@ -1,0 +1,49 @@
+netcdf drifters.res {
+dimensions:
+	i = UNLIMITED ; // (4 currently)
+variables:
+	double i ;
+	int id(i) ;
+		id:long_name = "identification of the drifter" ;
+		id:units = "dimensionless" ;
+		id:packing = 0 ;
+	int ine(i) ;
+		ine:long_name = "i index" ;
+		ine:units = "none" ;
+		ine:packing = 0 ;
+	int jne(i) ;
+		jne:long_name = "j index" ;
+		jne:units = "none" ;
+		jne:packing = 0 ;
+	double lat(i) ;
+		lat:long_name = "latitude" ;
+		lat:units = "m" ;
+	double lon(i) ;
+		lon:long_name = "longitude" ;
+		lon:units = "degrees_E" ;
+	double depth(i) ;
+		depth:long_name = "depth below surface" ;
+	double time(i) ;
+		time:units = "days since 1900-01-01 00:00:00" ;
+
+// global_Attribures:
+	:time_axis = 0 ;
+
+data:
+
+ i = 4 ;
+
+ id = 1, 2, 3, 4 ;
+
+ ine = 0, 0, 0, 0 ;
+
+ jne = 0, 0, 0, 0 ;
+
+ lat = 40, 40, 40, 40 ;
+
+ lon = 5, 10, 15, 20 ;
+
+ depth = 15, 15, 15, 15 ;
+
+ time = 0, 0, 0, 0 ;
+}
