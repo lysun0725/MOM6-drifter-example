@@ -1,6 +1,6 @@
  &MOM_input_nml
          output_directory = './',
-         input_filename = 'n'
+         input_filename = 'r'
          restart_input_dir = 'INPUT/',
          restart_output_dir = 'RESTART/',
          parameter_filename = 'MOM_input',
@@ -14,4 +14,8 @@
    calendar = 'noleap'
    months=0
    days=1
+ /
+
+ &particles_nml
+   really_debug = .true.  
  /
