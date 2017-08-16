@@ -3,10 +3,10 @@ dimensions:
 	i = UNLIMITED ; // (4 currently)
 variables:
 	double i ;
-	int id(i) ;
-		id:long_name = "identification of the drifter" ;
-		id:units = "dimensionless" ;
-		id:packing = 0 ;
+	int drifter_num(i) ;
+		drifter_num:long_name = "identification of the drifter" ;
+		drifter_num:units = "dimensionless" ;
+		drifter_num:packing = 0 ;
 	int ine(i) ;
 		ine:long_name = "i index" ;
 		ine:units = "none" ;
@@ -26,14 +26,14 @@ variables:
 	double time(i) ;
 		time:units = "days since 1900-01-01 00:00:00" ;
 
-// global_Attribures:
+// global_Attributes:
 	:time_axis = 0 ;
 
 data:
 
  i = 4 ;
 
- id = 1, 2, 3, 4 ;
+ drifter_num = 1, 2, 3, 4 ;
 
  ine = 0, 0, 0, 0 ;
 
