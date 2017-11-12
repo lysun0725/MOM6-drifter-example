@@ -1,6 +1,6 @@
  &MOM_input_nml
          output_directory = './',
-         input_filename = 'r'
+         input_filename = 'n'
          restart_input_dir = 'INPUT/',
          restart_output_dir = 'RESTART/',
          parameter_filename = 'MOM_input',
@@ -12,10 +12,15 @@
  &particle_driver_nml
    date_init = 1,1,1,0,0,0
    calendar = 'noleap'
-   months=0
-   days=1
+   months=12
+   days=0
+   dt_seconds=3600
  /
 
  &particles_nml
-   really_debug = .true.  
+   really_debug = .false.
+   traj_sample_hrs = 1,
+   traj_write_hrs = 1,
+   save_short_traj = .true.
+
  /
