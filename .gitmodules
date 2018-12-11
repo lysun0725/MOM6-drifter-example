@@ -22,6 +22,3 @@
 [submodule "src/mkmf"]
 	path = src/mkmf
 	url = https://github.com/NOAA-GFDL/mkmf.git
-[submodule "src/drifters"]
-	path = src/drifters
-	url = https://github.com/lysun0725/drifters.git
