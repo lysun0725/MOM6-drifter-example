@@ -1,9 +1,6 @@
 [submodule "src/FMS"]
 	path = src/FMS
 	url = https://github.com/NOAA-GFDL/FMS.git
-[submodule "src/MOM6"]
-	path = src/MOM6
-	url = https://github.com/NOAA-GFDL/MOM6.git
 [submodule "src/SIS2"]
 	path = src/SIS2
 	url = https://github.com/NOAA-GFDL/SIS2.git
@@ -22,3 +19,6 @@
 [submodule "src/mkmf"]
 	path = src/mkmf
 	url = https://github.com/NOAA-GFDL/mkmf.git
+[submodule "src/MOM6"]
+	path = src/MOM6
+	url = https://github.com/lysun0725/MOM6.git
