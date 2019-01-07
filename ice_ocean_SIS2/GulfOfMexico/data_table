@@ -1,18 +1,18 @@
-"ATM" , "p_surf"        , "SLP"         , "./INPUT/slp.clim.nc"          , "bilinear" ,  1.0
-"ATM" , "p_bot"         , "SLP"         , "./INPUT/slp.clim.nc"          , "bilinear" ,  1.0
-"ATM" , "t_bot"         , "T_10_MOD"    , "./INPUT/t_10_mod.clim.nc"     , "bilinear" ,  1.0
-"ATM" , "sphum_bot"     , "Q_10_MOD"    , "./INPUT/q_10_mod.clim.nc"     , "bilinear" ,  1.0
-"ATM" , "u_bot"         , "U_10_MOD"    , "./INPUT/u_10_mod.clim.nc"     , "bicubic",   1.0
-"ATM" , "v_bot"         , "V_10_MOD"    , "./INPUT/v_10_mod.clim.nc"     , "bicubic",   1.0
+"ATM" , "p_surf"        , "PRES"        , "./INPUT/PRES.flp.2012_mem001.nc"          , "bilinear" ,  1.0
+"ATM" , "p_bot"         , "PRES"        , "./INPUT/PRES.flp.2012_mem001.nc"          , "bilinear" ,  1.0
+"ATM" , "t_bot"         , "2t"          , "./INPUT/TMP2m.flp.2012_mem001.nc"         , "bilinear" ,  1.0
+"ATM" , "sphum_bot"     , "SPFH"        , "./INPUT/SPFH2m.flp.2012_mem001.nc"        , "bilinear" ,  1.0
+"ATM" , "u_bot"         , "10u"         , "./INPUT/UGRD10m.flp.2012_mem001.nc"     , "bicubic",   1.0
+"ATM" , "v_bot"         , "10v"         , "./INPUT/VGRD10m.flp.2012_mem001.nc"     , "bicubic",   1.0
 "ATM" , "z_bot"         , ""            , ""                             , "bilinear" , 10.0
 "ATM" , "gust"          , ""            , ""                             , "bilinear" ,  1.0e-4
-"ICE" , "lw_flux_dn"    , "LWDN_MOD"    , "./INPUT/ncar_rad.clim.nc"     , "bilinear" ,  1.0
-"ICE" , "sw_flux_vis_dir_dn", "SWDN_MOD", "./INPUT/ncar_rad.clim.nc"     , "bilinear" ,  0.285
-"ICE" , "sw_flux_vis_dif_dn", "SWDN_MOD", "./INPUT/ncar_rad.clim.nc"     , "bilinear" ,  0.285
-"ICE" , "sw_flux_nir_dir_dn", "SWDN_MOD", "./INPUT/ncar_rad.clim.nc"     , "bilinear" ,  0.215
-"ICE" , "sw_flux_nir_dif_dn", "SWDN_MOD", "./INPUT/ncar_rad.clim.nc"     , "bilinear" ,  0.215
-"ICE" , "lprec"         , "RAIN"        , "./INPUT/ncar_precip.clim.nc"  , "bilinear" ,  0.9933
-"ICE" , "fprec"         , "SNOW"        , "./INPUT/ncar_precip.clim.nc"  , "bilinear" ,  0.9933
+"ICE" , "lw_flux_dn"    , "DLWRF"       , "./INPUT/DLWRF.flp.2012_mem001.nc"     , "bilinear" ,  1.0
+"ICE" , "sw_flux_vis_dir_dn", "DSWRF"   , "./INPUT/DSWRF.flp.2012_mem001.nc"     , "bilinear" ,  0.285
+"ICE" , "sw_flux_vis_dif_dn", "DSWRF"   , "./INPUT/DSWRF.flp.2012_mem001.nc"     , "bilinear" ,  0.285
+"ICE" , "sw_flux_nir_dir_dn", "DSWRF"   , "./INPUT/DSWRF.flp.2012_mem001.nc"     , "bilinear" ,  0.215
+"ICE" , "sw_flux_nir_dif_dn", "DSWRF"   , "./INPUT/DSWRF.flp.2012_mem001.nc"     , "bilinear" ,  0.215
+"ICE" , "lprec"         , "PRATE"        , "./INPUT/PRATE.flp.2012_mem001.nc"     , "bilinear" ,  0.9933
+"ICE" , "fprec"         , ""            , ""                             , "none"  ,  0.0
 "ICE" , "runoff"        , ""            , ""                             , "none"  ,  0.0
 "ICE" , "calving"       , ""            , ""                             , "none"  ,  0.0
 "ICE" , "dhdt"          , ""            , ""                             , "none"  , 80.0
