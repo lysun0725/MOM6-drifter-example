@@ -22,3 +22,6 @@
 [submodule "src/MOM6"]
 	path = src/MOM6
 	url = https://github.com/lysun0725/MOM6.git
+[submodule "src/ice_param"]
+	path = src/ice_param
+	url = https://github.com/NOAA-GFDL/ice_param.git
